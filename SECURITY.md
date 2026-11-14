@@ -3,7 +3,7 @@
 ## Report a vulnerability privately
 
 Please **do not open a public issue or pull request** to disclose a suspected
-vulnerability. Use GitHub's [private vulnerability reporting form](https://github.com/crisesarmiento/opencode-routing-dashboard/security/advisories/new)
+vulnerability. Use GitHub's [private vulnerability reporting form](https://github.com/crisesarmiento/useroute/security/advisories/new)
 (repository **Security → Advisories → Report a vulnerability**). A GitHub account
 is required. Reports are shared privately with the repository's security
 maintainers rather than posted as public issues.

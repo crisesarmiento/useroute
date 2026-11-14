@@ -18,8 +18,8 @@ If another reviewer joins, consider requiring one external approval explicitly.
 
 ## Tracking work
 
-Use the public [Route project board](https://github.com/users/crisesarmiento/projects/6) (the GitHub project is still titled OpenCode Routing Dashboard),
-linked to this repository. The planned public domain is `useroute.dev` (not registered yet; `route.dev` is registered elsewhere and is not this project). The GitHub repository name remains `crisesarmiento/opencode-routing-dashboard` until a separately approved rename. It tracks three independent fields:
+Use the public [Route project board](https://github.com/users/crisesarmiento/projects/6),
+linked to this repository. The planned public domain is `useroute.dev` (not registered yet; `route.dev` is registered elsewhere and is not this project). The GitHub repository is `crisesarmiento/useroute` (renamed from `opencode-routing-dashboard` on 2026-11-14; GitHub redirects the old URLs). It tracks three independent fields:
 
 | Field | Meaning |
 | --- | --- |
@@ -50,13 +50,13 @@ No release schedule is implied by adding an issue to the project.
 
 Auto-add activation is a GitHub web setting, not delivered by merging this file.
 No custom Action or new project credential is configured. The maintainer confirmed
-activation on 2026-11-07. [Issue #18](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/18)
+activation on 2026-11-07. [Issue #18](https://github.com/crisesarmiento/useroute/issues/18)
 then appeared as `Todo` without a manual item-add; its Decision and Work type were
 initially empty, confirming that approval/type still require triage.
 
 1. Open project #6, then the top-right **… → Workflows** menu.
 2. Select **Auto-add to project → Edit**.
-3. Select repository `crisesarmiento/opencode-routing-dashboard`. In the adjacent
+3. Select repository `crisesarmiento/useroute`. In the adjacent
    filter, use `is:issue is:open` (the repository is a separate selector).
 4. Click **Save and turn on workflow**.
 5. Inspect **Item added to project** separately: if enabled, set Status to `Todo`.
@@ -124,15 +124,15 @@ These read-only commands inspect GitHub's actual state; local documentation does
 not apply remote settings automatically:
 
 ```sh
-gh api repos/crisesarmiento/opencode-routing-dashboard \
+gh api repos/crisesarmiento/useroute \
   --jq '{default_branch,allow_squash_merge,allow_merge_commit,allow_rebase_merge}'
-gh api repos/crisesarmiento/opencode-routing-dashboard/branches/develop/protection
-gh api repos/crisesarmiento/opencode-routing-dashboard/branches/main/protection
-gh label list --repo crisesarmiento/opencode-routing-dashboard
+gh api repos/crisesarmiento/useroute/branches/develop/protection
+gh api repos/crisesarmiento/useroute/branches/main/protection
+gh label list --repo crisesarmiento/useroute
 gh project field-list 6 --owner crisesarmiento --format json
 gh project item-list 6 --owner crisesarmiento --format json
-gh api repos/crisesarmiento/opencode-routing-dashboard/milestones
-gh api repos/crisesarmiento/opencode-routing-dashboard/private-vulnerability-reporting
+gh api repos/crisesarmiento/useroute/milestones
+gh api repos/crisesarmiento/useroute/private-vulnerability-reporting
 ```
 
 When changing safeguards, inspect existing rules first, preserve unrelated

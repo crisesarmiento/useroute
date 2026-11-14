@@ -2,7 +2,7 @@
 
 ## Status and context
 
-**Research contract, approved by the maintainer on 2026-11-09 in [#5](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/5) as documentation only.** It defines meanings and states; it does not implement, collect, authorize or display anything. Classification (per `evidence-contract-review`): **B** (contract and validation) for this record; **C** (new integration and authorization) for any future collector. Related: [#4](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/4) (possible display surface, not a prerequisite), [#8](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/8), [#9](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/9).
+**Research contract, approved by the maintainer on 2026-11-09 in [#5](https://github.com/crisesarmiento/useroute/issues/5) as documentation only.** It defines meanings and states; it does not implement, collect, authorize or display anything. Classification (per `evidence-contract-review`): **B** (contract and validation) for this record; **C** (new integration and authorization) for any future collector. Related: [#4](https://github.com/crisesarmiento/useroute/issues/4) (possible display surface, not a prerequisite), [#8](https://github.com/crisesarmiento/useroute/issues/8), [#9](https://github.com/crisesarmiento/useroute/issues/9).
 
 Today the dashboard has no CI, pull request or human-approval source. The Sessions inspector ([SPEC](../SPEC.md)) shows retained local evidence only and leaves external evidence out of scope. Standard logs do not establish task success or human approval ([known limits](../KNOWN_ISSUES.md)).
 
@@ -104,6 +104,6 @@ Listed for the maintainer; none is applied or implied here.
 
 ## Verification and limits
 
-This record is source-reviewed documentation: it was checked against [#5](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/5)'s criteria, SPEC, KNOWN_ISSUES and the Sessions inspector scope. The synthetic cases are planned, not executed; no provider API was queried, so provider field names and semantics (for example how a check run reports its head SHA) are **unverified** and must be confirmed against official documentation in the integration step. No runtime behavior is claimed.
+This record is source-reviewed documentation: it was checked against [#5](https://github.com/crisesarmiento/useroute/issues/5)'s criteria, SPEC, KNOWN_ISSUES and the Sessions inspector scope. The synthetic cases are planned, not executed; no provider API was queried, so provider field names and semantics (for example how a check run reports its head SHA) are **unverified** and must be confirmed against official documentation in the integration step. No runtime behavior is claimed.
 
 See the [roadmap](../ROADMAP.md) for where this sits in the sequence.
