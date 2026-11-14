@@ -14,7 +14,7 @@
 
 ## Lane Bay bounded identity (#33)
 
-- [x] Apply the accepted #39 DESIGN contract to the existing shell, source/navigation/scope rows, switchboard and ticker, with compact focus and responsive columns at both required sizes. Maintainer [scope approval](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/33#issuecomment-6715778224) includes detailed rejected-payload counts in Errors and the compact intake summary in the ticker. Local typecheck/lint/283 tests/build, 208 browser checks, eight reviewed DEMO captures, measured layout, keyboard/actual reduced motion and [implementation-head CI](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/42439710210/job/128606110666) pass. [PR #40](https://github.com/crisesarmiento/opencode-routing-dashboard/pull/40) records final-head CI after this documentation-only sign-off; maintainer review/merge remains separate. Source/filter/selection/replay semantics and aggregate range separation are preserved; no new project dependencies, telemetry, connection-state machine, Settings or persistent inspector. #23 remains open; #24/#25/#27/#31 remain separate.
+- [x] Apply the accepted #39 DESIGN contract to the existing shell, source/navigation/scope rows, switchboard and ticker, with compact focus and responsive columns at both required sizes. Maintainer [scope approval](https://github.com/crisesarmiento/useroute/issues/33#issuecomment-6715778224) includes detailed rejected-payload counts in Errors and the compact intake summary in the ticker. Local typecheck/lint/283 tests/build, 208 browser checks, eight reviewed DEMO captures, measured layout, keyboard/actual reduced motion and [implementation-head CI](https://github.com/crisesarmiento/useroute/actions/runs/42439710210/job/128606110666) pass. [PR #40](https://github.com/crisesarmiento/useroute/pull/40) records final-head CI after this documentation-only sign-off; maintainer review/merge remains separate. Source/filter/selection/replay semantics and aggregate range separation are preserved; no new project dependencies, telemetry, connection-state machine, Settings or persistent inspector. #23 remains open; #24/#25/#27/#31 remain separate.
 
 ## Agent workflow guidance and product direction
 
@@ -34,7 +34,7 @@ recorded in [KNOWN_ISSUES.md](KNOWN_ISSUES.md).
 
 ## Repository collaboration safeguards (#12)
 
-- [x] Align live branch protections and merge settings, restore the task label, track proposals separately from approved work in the repository project, and protect release publication against tags outside `main` history. Live settings and local validation are verified (252 tests; final guard regression rerun: 6 passing tests). Final acceptance requires green [PR #13](https://github.com/crisesarmiento/opencode-routing-dashboard/pull/13) CI and maintainer merge; see [REPOSITORY.md](REPOSITORY.md).
+- [x] Align live branch protections and merge settings, restore the task label, track proposals separately from approved work in the repository project, and protect release publication against tags outside `main` history. Live settings and local validation are verified (252 tests; final guard regression rerun: 6 passing tests). Final acceptance requires green [PR #13](https://github.com/crisesarmiento/useroute/pull/13) CI and maintainer merge; see [REPOSITORY.md](REPOSITORY.md).
 
 ## Proposal intake and private security reports (#14)
 
@@ -54,7 +54,7 @@ recorded in [KNOWN_ISSUES.md](KNOWN_ISSUES.md).
 - [x] **M6 Hardening** – rotation/truncation tests, 10k-line perf check (< 1 s), docs pass.
 
 Signed off after local validation and successful branch CI for `8d3f495`:
-[check](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/41822906254/job/126550242459).
+[check](https://github.com/crisesarmiento/useroute/actions/runs/41822906254/job/126550242459).
 No registry publication, service installation, merge, version bump or release is part of this sign-off.
 
 ## v0.2 — remote sources and exchange tools

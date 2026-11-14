@@ -329,8 +329,8 @@ registry. The npm name `route` already belongs to an unrelated library, so the p
 command are `useroute`. The product name is Route. The planned public domain is `useroute.dev`.
 It is not registered yet, and no site is live there. `route.dev` is already registered by a
 third party and is not this project. The draft visual identity is in
-[docs/BRAND.md](docs/BRAND.md); it does not authorize a redesign. The GitHub repository name
-is unchanged.
+[docs/BRAND.md](docs/BRAND.md); it does not authorize a redesign. The GitHub repository is
+`crisesarmiento/useroute` (renamed from `opencode-routing-dashboard`; old URLs redirect).
 
 For an installed executable on Linux, copy the three example units into your user systemd directory,
 adjust their `PATH` and optional `ORD_*` environment settings, then explicitly enable the desired units:

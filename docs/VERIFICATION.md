@@ -4,14 +4,14 @@ All fixtures are anonymized. Checks run on the feature branch; no real logs or c
 
 ## Lane Bay bounded identity (#33)
 
-Scope approval: [maintainer decision](https://github.com/crisesarmiento/opencode-routing-dashboard/issues/33#issuecomment-6715778224), after accepted DESIGN revision [#39](https://github.com/crisesarmiento/opencode-routing-dashboard/pull/39). The detailed browser-payload rejection counter belongs in Errors; the ticker retains a compact intake summary. No parser, aggregator, server, source, transport contract, dependency or font change is included.
+Scope approval: [maintainer decision](https://github.com/crisesarmiento/useroute/issues/33#issuecomment-6715778224), after accepted DESIGN revision [#39](https://github.com/crisesarmiento/useroute/pull/39). The detailed browser-payload rejection counter belongs in Errors; the ticker retains a compact intake summary. No parser, aggregator, server, source, transport contract, dependency or font change is included.
 
 ### Tests-first and integrated checks
 
 - Initial focused red: `bun --no-env-file test test/lane-bay.test.tsx test/ui-shell.test.tsx test/views.test.tsx` → exit 1, 35 pass / 17 fail on the new presentation/behavior assertions. Focused green after implementation: exit 0, 52 pass. Later focused reds cover aggregate source attribution, focus error/context fields, responsive containment, long-title access, model bars and the event-row focus target; each passed after its bounded correction.
 - Existing presentation tests explicitly adopt the accepted token values, state SVG shapes, ticker column tiers and aggregate wording. The ticker-alert helper now locates the outer ticker section rather than the relocated inner keyboard target; its alert-scope assertions are unchanged. No test was deleted, skipped or weakened. The font-size ceiling remains.
 - Reconciled local checks: `bun --no-env-file run typecheck` → exit 0; `bun --no-env-file run lint` → exit 0; `bun --no-env-file test` → exit 0, **283 pass / 0 fail / 40 files**; `bun --no-env-file scripts/build.ts` → exit 0; `git diff --check` → exit 0. Direct build invocation prevents automatic dotenv loading. Implementation-head CI is a separate gate recorded on the PR; later documentation-only sign-off reuses unchanged runtime evidence.
-- `gh pr checks 40 --repo crisesarmiento/opencode-routing-dashboard --watch --fail-fast` → exit 0, one successful `check` on `d5d4f85576ad55f90250486b3ed480ea73e79a86`: [CI run](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/42439710210/job/128606110666). The following PLAN sign-off changes documentation only; final-head CI is checked again and recorded on [PR #40](https://github.com/crisesarmiento/opencode-routing-dashboard/pull/40). No merge/release is implied.
+- `gh pr checks 40 --repo crisesarmiento/useroute --watch --fail-fast` → exit 0, one successful `check` on `d5d4f85576ad55f90250486b3ed480ea73e79a86`: [CI run](https://github.com/crisesarmiento/useroute/actions/runs/42439710210/job/128606110666). The following PLAN sign-off changes documentation only; final-head CI is checked again and recorded on [PR #40](https://github.com/crisesarmiento/useroute/pull/40). No merge/release is implied.
 
 ### Isolated browser verification
 
@@ -64,7 +64,7 @@ This change adds contributor procedures, documentation and static artifact tests
 - [Qualitative evaluation](AGENT_EVALUATION.md): two paired reasoning scenarios, with and without explicit skill loading; the UI lane was revalidated after procedural clarification. Both baselines already identified important safety boundaries. The skill-informed UI response named more repository-specific harness limits, but the small, partly guided sample establishes no general performance gain. Other cases and automatic triggering remain unverified. A static local viewer was generated from the four responses with existing skill-creator tooling; no server or additional dependency was needed, and no human viewer-feedback round is claimed.
 - Procedure review checked the existing verifier and demo scripts: canonical/exchange dataset separation, implicit demo builds, simulated EventSource coverage, viewport gaps, fixed screenshot names, replay versus live pause, and reduced-motion assertion limits are now explicit. No new browser/desktop runtime, screenshot, accessibility-compliance, or cross-platform validation was performed for this guidance-only change. Existing runtime evidence below is historical, not a fresh run.
 - Final-head CI and maintainer merge remain separate gates, recorded on the PR. No release/tag is created and no proposal is marked Approved by this maintenance work.
-- Implementation-head CI passed for `e39272112a771af509751d01070c37b88e4d3d25`: [check run](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/42415764719/job/128533386721). PLAN sign-off changes only documentation; focused guidance checks are revalidated and final-head CI is checked again on PR #30. The unchanged runtime/test-code evidence above is reused, not presented as a second full local run.
+- Implementation-head CI passed for `e39272112a771af509751d01070c37b88e4d3d25`: [check run](https://github.com/crisesarmiento/useroute/actions/runs/42415764719/job/128533386721). PLAN sign-off changes only documentation; focused guidance checks are revalidated and final-head CI is checked again on PR #30. The unchanged runtime/test-code evidence above is reused, not presented as a second full local run.
 
 ## Evidence path
 
@@ -191,7 +191,7 @@ PLAYWRIGHT_MODULE_PATH=<existing-playwright>/index.mjs CHROMIUM_PATH=/usr/bin/ch
 ## Branch CI and milestone sign-off
 
 `gh pr checks 2 --watch --fail-fast` → exit 0, 1 check passed / 0 failed for implementation head `8d3f49554448b4af17b3eaea8bd82a02eeb1ea49`.
-[CI check](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/41822906254/job/126550242459).
+[CI check](https://github.com/crisesarmiento/useroute/actions/runs/41822906254/job/126550242459).
 Only after that success were all M0–M6 (including M4a) boxes signed off in PLAN.md.
 The final sign-off commit changes documentation only; the same full local code evidence remains valid.
 
@@ -251,7 +251,7 @@ The final sign-off commit changes documentation only; the same full local code e
 
 ### M12 — clean-runner test portability
 
-- First final-head CI (`1c84a14`) failed: [run 41871192389](https://github.com/crisesarmiento/opencode-routing-dashboard/actions/runs/41871192389/job/126718390416), **238 passed / 8 failed**. All eight failures were `ENOENT` from `mkdtemp('/tmp/opencode/...')`: that directory is pre-created in this development-agent environment but not a clean GitHub runner.
+- First final-head CI (`1c84a14`) failed: [run 41871192389](https://github.com/crisesarmiento/useroute/actions/runs/41871192389/job/126718390416), **238 passed / 8 failed**. All eight failures were `ENOENT` from `mkdtemp('/tmp/opencode/...')`: that directory is pre-created in this development-agent environment but not a clean GitHub runner.
 - The fix uses the OS temporary directory for those test fixtures, rather than creating an agent-specific directory in CI or weakening assertions. Runtime/UI code is unchanged, so the prior 134-check browser and screenshot evidence remains valid.
 - Six test files changed only imports and eight temporary-directory prefixes. Focused run: 28 tests pass. Parent final run after reconciliation: typecheck/lint/**246 tests, 36 files**/build/diff-check all exit 0. Final head CI is rerun on PR #3; no browser rerun is needed for this test-only correction.
 
