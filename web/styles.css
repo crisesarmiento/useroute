@@ -11,12 +11,11 @@
   --dim: #a1a1aa;
   --dim2: #71717a;
   --sel: #22d3ee;
-  --accent-hover: #06b6d4;
   /* Deviation from BRAND (no warn token there): DEMO band, stale, connecting, partial. Distinct from accent and error. */
   --warn: #f2b548;
   --ok: #34d399;
   --err: #f87171;
-  --ghost: rgb(231 234 239 / 45%);
+  --ghost: rgb(244 244 245 / 45%);
   --row: 22px;
   --mono: "JetBrains Mono", ui-monospace, monospace;
   --label: "Inter", system-ui, sans-serif;
@@ -107,7 +106,7 @@ button {
   height: 18px;
   background: var(--warn);
   color: var(--bg);
-  font: 700 11px / 18px var(--label);
+  font: 600 11px / 18px var(--label);
   letter-spacing: 0.12em;
   text-align: center;
   text-transform: uppercase;
@@ -167,7 +166,7 @@ button {
   color: var(--ink);
 }
 .readout-label {
-  font: 700 11px / 1.3 var(--label);
+  font: 600 11px / 1.3 var(--label);
   letter-spacing: 0.06em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -223,7 +222,7 @@ button {
   border-bottom-color: var(--sel);
   background: var(--panel2);
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 600;
 }
 .views-nav button sup {
   margin-left: 4px;
@@ -268,7 +267,7 @@ button {
   margin: 0;
   height: 24px;
   padding: 0 12px;
-  font: 700 11px / 24px var(--label);
+  font: 600 11px / 24px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   white-space: nowrap;
@@ -324,7 +323,7 @@ button {
 .call-role {
   margin-left: 8px;
   color: var(--c, var(--ink));
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
 }
 .call-role .shape {
   margin-right: 4px;
@@ -373,7 +372,7 @@ button {
   font-size: 11px;
 }
 .focus-title {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
@@ -491,7 +490,7 @@ button {
 }
 .jack-label {
   fill: var(--c, var(--ink));
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -533,7 +532,7 @@ button {
   border: 1px solid var(--line);
 }
 .silent-title {
-  font: 700 13px var(--label);
+  font: 600 13px var(--label);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--ink);
@@ -608,7 +607,7 @@ button {
   margin: 0;
   padding: 3px 12px 3px 36px;
   border-bottom: 1px solid var(--line);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--warn);
@@ -651,7 +650,7 @@ button {
   flex: none;
   padding: 0 12px;
   color: var(--warn);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -679,7 +678,7 @@ button {
   border-left: 1px solid var(--line);
   background: transparent;
   color: var(--warn);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   cursor: pointer;
 }
 .ticker-alerts button:hover {
@@ -733,7 +732,7 @@ thead th {
   padding: 0 6px;
   background: var(--panel);
   border-bottom: 1px solid var(--line);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.04em;
   text-align: left;
   color: var(--dim);
@@ -854,7 +853,7 @@ td.c-err {
   height: 28px;
   padding: 0 12px;
   border-bottom: 1px solid var(--line);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -873,7 +872,7 @@ td.c-err {
 }
 .detail-body h3 {
   margin: 12px 0 4px;
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
@@ -1114,7 +1113,7 @@ td.c-err {
   background: transparent;
   border: 1px solid var(--line);
   padding: 0 8px;
-  font: 700 11px / 18px var(--label);
+  font: 600 11px / 18px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dim);
@@ -1146,7 +1145,7 @@ td.c-err {
 .view h3,
 .view section > h3 {
   margin: 14px 0 4px;
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink);
@@ -1179,7 +1178,7 @@ td.c-err {
   min-width: 0;
 }
 .facts dt {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dim);
@@ -1267,13 +1266,13 @@ td.c-err {
 }
 .matrix .col-label {
   fill: var(--ink);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 .matrix .row-label {
   fill: var(--ink);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -1285,7 +1284,7 @@ td.c-err {
   fill: var(--line);
 }
 .hist .bar.hit {
-  fill: var(--sel);
+  fill: var(--ink);
 }
 .baseline {
   stroke: var(--line);
@@ -1308,7 +1307,7 @@ td.c-err {
   font-size: 11px;
 }
 .multiple .mname {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--dim);
@@ -1317,7 +1316,7 @@ td.c-err {
   fill: var(--dim);
 }
 .multiple .bar.hit {
-  fill: var(--sel);
+  fill: var(--ink);
 }
 
 /* session timeline inside the event detail */
@@ -1412,7 +1411,7 @@ td.c-err {
   overflow: hidden;
 }
 .bar-title {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--dim);
@@ -1440,7 +1439,7 @@ td.c-err {
   margin-left: 0;
 }
 .source b {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -1495,7 +1494,7 @@ td.c-err {
 }
 .tally .tally-role {
   color: var(--c, var(--ink));
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1722,7 +1721,7 @@ td.c-err {
   padding: 3px 10px;
   border: 1px solid var(--sel);
   color: var(--ink);
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.08em;
   text-decoration: none;
   text-transform: uppercase;
@@ -1779,7 +1778,7 @@ a.dl:hover {
   overflow: hidden;
 }
 .sp-title {
-  font: 700 11px var(--label);
+  font: 600 11px var(--label);
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -1840,7 +1839,7 @@ a.dl:hover {
   white-space: nowrap;
 }
 .s-cols {
-  font-weight: 700;
+  font-weight: 600;
   border-bottom: 1px solid var(--line);
 }
 .s-row {
@@ -1890,7 +1889,7 @@ a.dl:hover {
   overflow-wrap: anywhere;
 }
 .s-id {
-  font-weight: 700;
+  font-weight: 600;
 }
 .s-timeline {
   max-height: 176px;
