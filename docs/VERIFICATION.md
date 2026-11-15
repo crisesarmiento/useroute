@@ -266,3 +266,48 @@ Browser evidence for the read-only Sessions inspector. Isolated Linux Chromium o
 - **Existing harness:** canonical fixtures in a temporary copy, `node scripts/verify-ui.mjs --url http://127.0.0.1:4792 --state-dir <temporary copy> --screenshots-dir <temporary> --report <temporary> --exchange yes` → first run exit 1, 206/208 (the two Tab-traversal checks still expected eight view buttons); after the explicit update to nine, **exit 0, 208 passed / 0 failed / 0 skipped**. Owned servers were stopped; no listener remained on the ports used.
 - **Revision after review (stage-only panel):** the first implementation reused the full-height drawer, which covered the header and nav, and widened the standard drawers to 810 / 780 px to fit nine tabs (measured: strip 676 px in a 596 px space, with a test failing on `Expected: >= 810 / Received: 720`). The panel was then moved inside the stage. Red first: four assertions failed on placement (`Expected: < 12193 / Received: 20831` for the panel inside `main.stage`, missing `aria-label="call in focus"`, `Expected length: 8 / Received length: 9` drawer tabs, missing 1100 px single-pane rules). Sessions is no longer a drawer tab, the drawers went back to 720 / 700 px, and a second throwaway script confirmed all eight drawers fit their tab strip at both sizes (596 / 596 and 576 / 576 px). The earlier `m33-*` captures therefore still show the right drawer widths.
 - **Limits:** the inspector's empty and unknown-session states, omission/eviction wording and link-down wording are covered by render tests, not by browser captures. Real disconnects (#24), other browsers, macOS, screen readers and new-user comprehension are not covered. Reduced motion was checked by emulation and computed styles; the inspector adds no motion.
+
+## BRAND redesign (#90)
+
+Presentation-only change in `web/`: BRAND palette, self-hosted Space Grotesk / Inter / JetBrains Mono (OFL), Y-node logo/favicon, **Route** wordmark, fixer lime. Approval: [#90 comment](https://github.com/crisesarmiento/useroute/issues/90#issuecomment-6898078152). No parser, aggregation, server or dependency change. Anonymized fixtures only; loopback only; no credentials or real logs read. Isolated Linux Chromium; **not an accessibility audit**; no user comprehension test.
+
+### Tests first (failing before, passing after)
+
+- Expectations moved to the BRAND contract before any implementation: `test/lane-bay.test.tsx` (wordmark `Route` + `brand-mark`, BRAND tokens (no `--accent-hover`), no `#000000`, no Lane Bay hexes, fixer `#C8F169` and no `#3CC8B4`, no `color-mix` with `--sel`, wordmark 16 px bold in `--display` with negative tracking, chart hit bars in ink not accent, no 700 on the label face), `test/ui-shell.test.tsx` (BRAND hex list, `#3CC8B4` absent, all `url()` in `fonts.css` exist, Space Grotesk / Inter / JetBrains Mono faces and their OFL files exist, Instrument Sans / IBM Plex Mono gone from CSS and disk), `test/product-identity.test.ts` (favicon: three lines, four circles, `#22D3EE`, `#0A0A0B`, no `#000000`, no old amber paths/hex, no gradient/filter; `index.html` links the favicon, no `https:`).
+- Red: `bun test test/lane-bay.test.tsx test/ui-shell.test.tsx test/product-identity.test.ts` → exit 1, 42 pass / 4 fail on the new expectations. Green after implementation: same command → exit 0.
+- Guards kept as-is: no shadows/gradients/`infinite`, `--dim2` non-text, 2 px focus ring, DEMO band 18 px `--warn` fill, state shapes, grid columns 300/1fr/300 and 256/1fr/232, font-size ceiling 20 px, `fonts.css` without `https:`/`data:`, no inline styles. No test was skipped, deleted or weakened; the wordmark size assertion moved 15 → 16 px bold with the display face (`scripts/verify-ui.mjs` check updated the same way).
+
+### Local checks (final head)
+
+| Command | Exit | Result |
+| --- | --- | --- |
+| `bun run typecheck` | 0 | clean |
+| `bun run lint` | 0 | clean |
+| `bun run test` | 0 | 344 pass / 0 fail / 45 files |
+| `bun run build` | 0 | `dist/` written, fonts copied to `dist/assets/fonts` |
+
+`test/performance.test.ts` ("streams an append" within the 2 s budget) failed intermittently while an unrelated process kept the machine at load average ≈ 12; it is also intermittent on a clean `origin/develop` worktree under the same load (mixed pass/fail). The full suite passed on a re-run; CI on the PR head is the gate.
+
+### Browser verification (isolated)
+
+Playwright 1.60.0 copied from the pre-existing bun cache into a temporary directory (no install, project manifest and lockfile unchanged); existing `/usr/bin/chromium`. Fixture server: temporary copies of the fixtures, empty temporary HOME, `ORD_DEMO=true`, loopback port, `bun --no-env-file src/cli.ts serve` on the completed build.
+
+```sh
+PLAYWRIGHT_MODULE_PATH=<tmp>/node_modules/playwright/index.mjs CHROMIUM_PATH=/usr/bin/chromium \
+node scripts/verify-ui.mjs --url http://127.0.0.1:<port> --state-dir <tmp-state> \
+  --screenshots-dir <tmp-shots> --report <tmp>/report.json --exchange yes
+```
+
+- **Exit 0, 208 passed / 0 failed / 0 skipped** (final head). Includes fonts loaded without errors, CSP/console/page/network checks, populated/empty/partial/error states, drawers, replay, responsive tiers and keyboard focus.
+- Extra loopback check (own script, reduced motion `no-preference` and `reduce`): no HTTP status ≥ 400, no failed request, no console error or CSP violation; `Space Grotesk`, `Inter` and `JetBrains Mono` all `loaded`; `/assets/favicon.svg` → 200; `prefers-reduced-motion: reduce` matched in the second pass.
+- Screenshots reviewed against `docs/DESIGN.md` "BRAND redesign (#90)" and `docs/BRAND.md`, then copied to `docs/screenshots/`: `m90-{populated,empty,partial,error,replay,combined,quota}-{1440x900,1024x768}.png`, `m90-flow-1440x900.png`, `m90-agreement-1024x768.png`, `m90-sessions-1440x900.png`, `m90-header-wordmark.png` and `m90-favicon-16-32.png` (favicon rendered at 16 and 32 px on `#0A0A0B`). The m4*, m4a*, m5*, m9*, m11*, m33*, m43*, m58* files are untouched. README images now use the m90 set.
+- Observations: layout identical to #33 measurements; DEMO band visible in every capture; fixer shows lime, context rings ink; accent limited to logo, focus and selection bars. Pre-existing and unchanged: the SILENT EXCHANGE card overlaps part of the explorer jack in the empty/error states (also in the m33 captures).
+- Contrast table and the `--warn`/fixer deviations are in `docs/DESIGN.md`; ratios are computed, not an audit. Owned servers stopped; no listeners remain on the used ports.
+
+### Limits
+
+Anonymized DEMO data only; no real OpenCode logs; no multi-browser or screen-reader check; font files were fetched from the `google/fonts` repository (OFL texts included) rather than from an npm package.
+
+### Review follow-up (PR #93)
+
+The first push documented ink hit bars but the CSS still used `fill: var(--sel)` for `.hist .bar.hit` and `.multiple .bar.hit` (a silent no-op replacement on my side); review caught it. Fixed with a test written first: `test/lane-bay.test.tsx` failed against the previous `styles.css` (26 pass / 1 fail) and passes now. Also: label-face weights 700 → 600, unused `--accent-hover` removed, `--ghost` rebased on the new ink, favicon square (no `rx`), `m90-*` screenshots refreshed (agreement drawer now shows ink bars). Final-head commands are listed in the PR.

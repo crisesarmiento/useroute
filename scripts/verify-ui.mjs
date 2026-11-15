@@ -639,8 +639,8 @@ async function laneBayChecks({ browser, origin, initial, outDir, check, problems
     ok("DEMO band height 18px", demoHeight === 18, `height=${demoHeight}`);
     ok("readout value is 15px", (await style(".readout-value", "fontSize")) === "15px");
     ok(
-      "wordmark is 15px bold",
-      (await style(".brand-name", "fontSize")) === "15px" && /700|bold/.test(await style(".brand-name", "fontWeight")),
+      "wordmark is 16px bold (BRAND display face)",
+      (await style(".brand-name", "fontSize")) === "16px" && /700|bold/.test(await style(".brand-name", "fontWeight")),
     );
 
     // Stage column widths from DESIGN #82: measure the shell grid tracks, not inner panels.

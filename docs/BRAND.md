@@ -2,7 +2,7 @@
 
 **Version:** 0.2 (locked for redesign)  
 **Date:** 2026-11-13  
-**Status:** Draft — pending Decision for redesign  
+**Status:** Approved as the visual contract for [#90](https://github.com/crisesarmiento/useroute/issues/90) ([maintainer decision](https://github.com/crisesarmiento/useroute/issues/90#issuecomment-6898078152)); applied in `web/`. Mapping, contrasts and documented deviations: [DESIGN](DESIGN.md) "BRAND redesign (#90)".  
 **Domain (planned):** useroute.dev (not yet purchased)
 
 ## Product
