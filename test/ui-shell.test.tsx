@@ -251,22 +251,25 @@ test("event detail exposes every field and the raw records", async () => {
 
 test("stylesheet follows DESIGN tokens, local fonts and motion rules", async () => {
   const css = await Bun.file("web/styles.css").text();
-  // Lane Bay graphite tokens (docs/DESIGN.md "Color system"), replacing the amber-phosphor hexes explicitly.
+  // BRAND tokens (docs/BRAND.md, docs/DESIGN.md "BRAND redesign"); --warn is the documented deviation.
   for (const token of [
-    "#0B0D10",
-    "#10131A",
-    "#171B24",
-    "#232831",
-    "#E7EAEF",
-    "#8590A0",
-    "#5B6473",
-    "#C8F169",
+    "#0A0A0B",
+    "#141416",
+    "#1C1C1F",
+    "#27272A",
+    "#F4F4F5",
+    "#A1A1AA",
+    "#71717A",
+    "#22D3EE",
+    "#06B6D4",
     "#F2B548",
-    "#5FD9A0",
-    "#FF6B5B",
+    "#34D399",
+    "#F87171",
   ])
     expect(css.toUpperCase()).toContain(token);
-  for (const role of ["#E8C26A", "#C792EA", "#3CC8B4", "#82AAFF", "#F78C6C"]) expect(css.toUpperCase()).toContain(role);
+  expect(css.toUpperCase()).not.toContain("#000000");
+  expect(css.toUpperCase()).not.toContain("#3CC8B4");
+  for (const role of ["#E8C26A", "#C792EA", "#C8F169", "#82AAFF", "#F78C6C"]) expect(css.toUpperCase()).toContain(role);
   expect(css).toContain("--row: 22px");
   expect(css).toContain("prefers-reduced-motion");
   expect(css).toContain(":focus-visible");
@@ -280,8 +283,14 @@ test("stylesheet follows DESIGN tokens, local fonts and motion rules", async () 
   expect(css).not.toContain("@font-face");
   expect(faces).not.toMatch(/https?:|data:/);
   const urls = [...faces.matchAll(/url\(\.\/fonts\/([^)]+)\)/g)].map((m) => m[1]!);
-  expect(urls.length).toBeGreaterThanOrEqual(4);
+  expect(urls.length).toBeGreaterThanOrEqual(3);
   for (const file of urls) expect(existsSync(`web/assets/fonts/${file}`)).toBe(true);
-  expect(existsSync("web/assets/fonts/IBMPlexMono-OFL.txt")).toBe(true);
-  expect(existsSync("web/assets/fonts/InstrumentSans-OFL.txt")).toBe(true);
+  for (const family of ["Space Grotesk", "Inter", "JetBrains Mono"])
+    expect(faces).toContain(`font-family: "${family}"`);
+  for (const ofl of ["SpaceGrotesk", "Inter", "JetBrainsMono"])
+    expect(existsSync(`web/assets/fonts/${ofl}-OFL.txt`)).toBe(true);
+  // The retired Lane Bay faces are gone from CSS and disk.
+  expect(`${css}${faces}`).not.toMatch(/IBM Plex|Instrument Sans/);
+  expect(existsSync("web/assets/fonts/IBMPlexMono-OFL.txt")).toBe(false);
+  expect(existsSync("web/assets/fonts/InstrumentSans-OFL.txt")).toBe(false);
 });

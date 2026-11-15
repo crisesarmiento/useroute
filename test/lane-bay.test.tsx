@@ -368,12 +368,16 @@ test("the scope strip says its clock is the browser's local time", async () => {
 
 test("header: sentence-case wordmark and all six readouts", async () => {
   const html = shell(await fixtureState());
-  expect(html).toContain('class="brand-name">Routing exchange<');
+  expect(html).toContain('class="brand-name">Route<');
+  expect(html).not.toContain("Routing exchange");
+  expect(html).not.toContain("UseRoute");
+  // BRAND Y-node mark sits beside the wordmark; decorative, so aria-hidden.
+  expect(html).toMatch(/<svg[^>]*class="brand-mark"[^>]*aria-hidden="true"/);
   for (const label of ["prompts/min", "context agreement", "fallback", "error rate", "p50 latency", "tokens today"])
     expect(html).toContain(`>${label}<`);
 });
 
-test("stylesheet: Lane Bay graphite tokens, role hues, focus and evidence styling", async () => {
+test("stylesheet: BRAND tokens, role hues, focus and evidence styling", async () => {
   const css = await Bun.file("web/styles.css").text();
   const up = css.toUpperCase();
   const root = css.slice(css.indexOf(":root"), css.indexOf("}", css.indexOf(":root")));
@@ -382,27 +386,49 @@ test("stylesheet: Lane Bay graphite tokens, role hues, focus and evidence stylin
       .match(new RegExp(`--${name}:\\s*([^;]+);`))?.[1]
       ?.trim()
       .toLowerCase();
-  expect(token("bg")).toBe("#0b0d10");
-  expect(token("panel")).toBe("#10131a");
-  expect(token("panel2")).toBe("#171b24");
-  expect(token("line")).toBe("#232831");
-  expect(token("ink")).toBe("#e7eaef");
-  expect(token("dim")).toBe("#8590a0");
-  expect(token("dim2")).toBe("#5b6473");
-  expect(token("sel")).toBe("#c8f169");
+  expect(token("bg")).toBe("#0a0a0b");
+  expect(token("panel")).toBe("#141416");
+  expect(token("panel2")).toBe("#1c1c1f");
+  expect(token("line")).toBe("#27272a");
+  expect(token("ink")).toBe("#f4f4f5");
+  expect(token("dim")).toBe("#a1a1aa");
+  expect(token("dim2")).toBe("#71717a");
+  expect(token("sel")).toBe("#22d3ee");
+  expect(token("accent-hover")).toBe("#06b6d4");
+  // --warn is a documented deviation from BRAND (no warn token there): DEMO band, stale, connecting.
   expect(token("warn")).toBe("#f2b548");
-  expect(token("ok")).toBe("#5fd9a0");
-  expect(token("err")).toBe("#ff6b5b");
+  expect(token("ok")).toBe("#34d399");
+  expect(token("err")).toBe("#f87171");
   expect(token("ghost")).toMatch(/45%/);
-  // Amber is retired as a token; the old amber and warm graphite hexes are gone.
+  // No pure black anywhere; Lane Bay graphite, lime accent and the old amber hexes are gone.
+  expect(up).not.toContain("#000000");
+  expect(up).not.toMatch(/#000(?![0-9A-F])/);
+  for (const lane of [
+    "#0B0D10",
+    "#10131A",
+    "#171B24",
+    "#232831",
+    "#E7EAEF",
+    "#8590A0",
+    "#5B6473",
+    "#5FD9A0",
+    "#FF6B5B",
+  ])
+    expect(up).not.toContain(lane);
   expect(root).not.toContain("--amber");
   expect(root).not.toContain("--teal");
   for (const old of ["#FFB000", "#0E0F0C", "#171914", "#2A2D25", "#E8E4D8", "#8C8A80", "#FF5A3C", "#7BD88F"])
     expect(up).not.toContain(old);
   expect(css).not.toContain("var(--amber)");
-  // Orchestrator moves off amber; the other four hues stay.
+  // Accent never paints a surface: no color-mix with --sel, no gradients (cyan is bars, hairlines, focus only).
+  expect(css).not.toMatch(/color-mix\([^)]*var\(--sel\)/);
+  // Fixer moves from teal to lime (cyan accent would clash with teal); contexts rings stay ink, never cyan.
+  expect(up).not.toContain("#3CC8B4");
+  expect(css).toMatch(/\.r-fixer\s*\{\s*--c:\s*#c8f169/i);
+  expect(css).not.toMatch(/\.ctx-ring[^{]*\{[^}]*(--sel|#22d3ee)/i);
+  // Orchestrator stays off amber; the other hues stay.
   expect(css).toMatch(/\.r-orchestrator\s*\{\s*--c:\s*#e8c26a/i);
-  for (const hue of ["#C792EA", "#3CC8B4", "#82AAFF", "#F78C6C"]) expect(up).toContain(hue);
+  for (const hue of ["#C792EA", "#C8F169", "#82AAFF", "#F78C6C"]) expect(up).toContain(hue);
   // Focus ring: 2 px --sel with a 1 px offset, and an explicit active-row indicator while the ticker holds focus.
   expect(css).toMatch(/:focus-visible\s*\{\s*outline:\s*2px solid var\(--sel\);\s*outline-offset:\s*1px/);
   expect(css).toMatch(/\.ticker-scroll:focus[^{]*\.row\.sel[^{]*\{[^}]*outline:\s*2px solid var\(--sel\)/);
@@ -411,9 +437,14 @@ test("stylesheet: Lane Bay graphite tokens, role hues, focus and evidence stylin
   expect(css).toMatch(/\.row\.sel td\s*\{[^}]*background:\s*var\(--panel2\)/);
   // DEMO band: solid --warn fill, dark text, 18 px.
   expect(css).toMatch(/\.demo-band\s*\{[^}]*height:\s*18px[^}]*background:\s*var\(--warn\)/);
-  // Readouts 15 px, wordmark 15 px bold ink.
+  // Readouts 15 px, wordmark 16 px bold ink in the display face with tight tracking (no hero size).
   expect(css).toMatch(/\.readout-value\s*\{[^}]*font:\s*700 15px/);
-  expect(css).toMatch(/\.brand-name\s*\{[^}]*font:\s*700 15px[^}]*color:\s*var\(--ink\)/);
+  expect(css).toMatch(
+    /\.brand-name\s*\{[^}]*font:\s*700 16px[^}]*var\(--display\)[^}]*letter-spacing:\s*-[\d.]+em[^}]*color:\s*var\(--ink\)/,
+  );
+  expect(css).toMatch(/--display:\s*"Space Grotesk"/);
+  expect(css).toMatch(/--label:\s*"Inter"/);
+  expect(css).toMatch(/--mono:\s*"JetBrains Mono"/);
   // Aggregate rail is a dashed --dim2 frame with a --warn label.
   expect(css).toMatch(/\.models\s*\{[^}]*border:\s*1px dashed var\(--dim2\)/);
   expect(css).toMatch(/\.rail-note\s*\{[^}]*color:\s*var\(--warn\)/);

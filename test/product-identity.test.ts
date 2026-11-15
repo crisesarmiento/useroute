@@ -33,3 +33,26 @@ test("systemd units call the useroute bin", async () => {
   expect(migration).toContain("systemctl --user enable --now useroute-snapshot.timer");
   expect(migration).not.toContain("UseRoute");
 });
+
+test("favicon is the BRAND Y-node: white centre, three cyan lines with dots, #0A0A0B background", async () => {
+  const svg = await Bun.file(new URL("../web/assets/favicon.svg", import.meta.url)).text();
+  const up = svg.toUpperCase();
+  expect(up).toContain("#22D3EE");
+  expect(up).toContain("#0A0A0B");
+  expect(up).not.toContain("#000000");
+  expect(up).not.toMatch(/#000(?![0-9A-F])/);
+  // Old amber icon is gone.
+  for (const old of ["#FFB000", "#0E0F0C", "#E8E4D8", "#8C8A80"]) expect(up).not.toContain(old);
+  expect(svg).not.toContain("stroke-dasharray");
+  // Three lines, three end dots, one white centre circle; no glow, gradient or filter.
+  expect(svg.match(/<line\b/g)).toHaveLength(3);
+  expect(svg.match(/<circle\b/g)).toHaveLength(4);
+  expect(svg).toMatch(/<circle[^>]*fill="#F4F4F5"/i);
+  expect(svg).not.toMatch(/gradient|filter|blur|shadow/i);
+});
+
+test("index.html points at the favicon and loads local font css", async () => {
+  const html = await Bun.file(new URL("../web/index.html", import.meta.url)).text();
+  expect(html).toContain("/assets/favicon.svg");
+  expect(html).not.toMatch(/https?:\/\//);
+});
