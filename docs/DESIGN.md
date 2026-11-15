@@ -9,6 +9,7 @@ The UI must be beautiful, original, dynamic and fun, and dense. It is explicitly
 ## Contract status
 
 - **Accepted in merged PR [#39](https://github.com/crisesarmiento/useroute/pull/39):** the **Lane Bay** contract below (issue [#32](https://github.com/crisesarmiento/useroute/issues/32), parent [#23](https://github.com/crisesarmiento/useroute/issues/23); maintainer decisions recorded in [the #32 comment](https://github.com/crisesarmiento/useroute/issues/32#issuecomment-6714423966)). It is the target for UI work in #33.
+- **BRAND redesign approved in [#90](https://github.com/crisesarmiento/useroute/issues/90)** ([maintainer decision](https://github.com/crisesarmiento/useroute/issues/90#issuecomment-6898078152), Project #6 Decision=Approved, full scope). [`docs/BRAND.md`](BRAND.md) is now the visual contract (palette, type, logo) for this issue; the section "BRAND redesign (#90)" below maps it onto the shell. **Lane Bay is the antecedent, not the current palette**: its layout, evidence and switchboard rules (columns, drawers, ticker, state icons with shape + word, DEMO band, ghost-only wires) stay in force except where "BRAND redesign" records a deviation. The "Typography (Lane Bay)" and "Color system (Lane Bay)" sections are kept for their contrast methods and rationale; their hex and font values are superseded.
 - **#33 has separate [bounded-scope approval](https://github.com/crisesarmiento/useroute/issues/33#issuecomment-6715778224).** This implementation applies that slice; the previously shipped UI uses amber-phosphor until #33 lands. This approval does not extend to the deferred items below or the rest of #23.
 - The sections "Previous identity" and the M4a/M4/M9/M11 reviews at the end describe what ships today. They stay as the historical record and as the baseline for any UI work done before #33.
 - **Approved by the maintainer on 2026-11-08 in [#41](https://github.com/crisesarmiento/useroute/issues/41) (parent [#4](https://github.com/crisesarmiento/useroute/issues/4)):** the read-only **Sessions inspector** in the section "Sessions inspector" below. It is an exception to the "no new views" rule in "Navigation and terminology" and to the eight-view list under "Concept". The exception takes effect when the PR that records it merges. It authorizes only the follow-up work in #42 (model) and #43 (view and captures), each still needing its own start.
@@ -25,7 +26,62 @@ Routing is shown as a live switchboard. A modern look is allowed; the telephone-
 - Drawers (nav row, keys 1–8): Agreement, Usage, Errors, History, Alerts, Quota, Presets, Export. Approved in #41: a ninth, Sessions (key 9).
 - Not drawn in v1 (evidence limits, see "Evidence-driven deviations"): per-call agent→model cables and fallback sparks.
 
-## Typography (Lane Bay)
+## BRAND redesign (#90)
+
+Applies [`BRAND.md`](BRAND.md) to `web/`. Presentation only: no parser, aggregation or field-meaning change, no new view or metric.
+
+### Palette (tokens in `web/styles.css` `:root`)
+
+Contrast is **computed with the WCAG formula on token hex pairs; it is not an accessibility audit.**
+
+| Token | BRAND name | Hex | Use | Contrast on bg / surface / elevated |
+| --- | --- | --- | --- | --- |
+| `--bg` | bg | `#0A0A0B` | app background (no `#000000` anywhere) | n/a |
+| `--panel` | surface | `#141416` | header, nav, drawers | n/a |
+| `--panel2` | surface-elevated | `#1C1C1F` | selected row, hover, raised card | n/a |
+| `--line` | border | `#27272A` | hairlines | 1.3 / 1.2 / 1.1, decorative separators only |
+| `--ink` | text | `#F4F4F5` | primary text | 18.0 / 16.7 / 15.5 |
+| `--dim` | text-secondary | `#A1A1AA` | secondary text, metadata | 7.7 / 7.2 / 6.6 |
+| `--dim2` | text-muted | `#71717A` | **non-text only** (idle rings, dashed frames); BRAND allows placeholders/disabled, this UI does not use it for reading text | 4.1 / 3.8 / 3.5 (below 4.5 for text on every surface) |
+| `--sel` | accent | `#22D3EE` | focus ring, selection bar/hairline, links/CTA, logo | 11.0 / 10.2 / 9.4 |
+| `--accent-hover` | accent-hover | `#06B6D4` | hover on accent elements | 8.2 / 7.6 / 7.0 |
+| `--ok` | success | `#34D399` | live, ok | 10.3 / 9.6 / 8.8 |
+| `--err` | error | `#F87171` | error, link down | 7.2 / 6.7 / 6.1 |
+| `--warn` | none in BRAND | `#F2B548` (unchanged) | DEMO band, stale, connecting, partial, `NOT LINKED TO CALLS` | 10.8 / 10.1 / 9.3 |
+| `--ghost` | none | ink at 45% | dashed Jev suggestion wire | unchanged |
+
+- **Explicit deviation:** BRAND has no warning colour. `--warn` stays because the DEMO contract needs a hue distinct from the accent and from error. The DEMO band remains solid, full width, `--warn` fill, dark text (10.8:1), 18 px.
+- **Accent discipline (BRAND "Do Not"):** `--sel` is never a surface fill. Selection stays a 2 px bar or hairline plus a surface step (`--panel2`); focus stays a 2 px outline. The reduced-motion arrival highlight, which was an 18% accent tint, is now a flat `--panel2` step, and a test forbids `color-mix` with `--sel`. Histogram "hit" bars use `--ink`, not the accent. No gradients, shadows or glow.
+- **Role hues:** orchestrator `#E8C26A`, oracle `#C792EA`, explorer `#82AAFF`, designer `#F78C6C` are unchanged. **Fixer moves from teal `#3CC8B4` to lime `#C8F169`** (the former Lane Bay `--sel`; contrast 15.3 / 14.2 / 13.1). Why: the approved cyan accent `#22D3EE` sits at hue ≈188° and the old teal at ≈171°, a Δ of about 17°, so selection/focus and fixer would read as one colour. Lime is ≈78°, about 110° from the accent, and does not collide with orchestrator, oracle, explorer, designer or success `#34D399`. `#3CC8B4` no longer appears in `styles.css` (tested). Role shapes (diamond, hexagon, circle, square, pentagon) are untouched; colour only reinforces them.
+- **Recorded context** stays a hollow ring in **ink**. A cyan context ring remains **rejected**: it would again collide with the accent (and previously with the fixer teal). Context is never painted with the accent.
+
+### Typography (self-hosted, OFL)
+
+| Role | Family | Weights | Token |
+| --- | --- | --- | --- |
+| wordmark, display | Space Grotesk | 700, letter-spacing -0.02em | `--display` |
+| UI labels and body text | Inter | 400, 500, 600, 700 | `--label` |
+| data, tabular numerals | JetBrains Mono | 400, 700 | `--mono` |
+
+- Variable TTFs in `web/assets/fonts/` (`SpaceGrotesk.ttf`, `Inter.ttf`, `JetBrainsMono.ttf`, each with its `*-OFL.txt`), declared only in `web/assets/fonts.css` with relative `./fonts/` URLs: no CDN, no `https:`, no `data:`, so the CSP (`default-src 'self'`) holds. Instrument Sans and IBM Plex Mono and their files are removed. Sources: the `google/fonts` repository (`ofl/spacegrotesk`, `ofl/inter`, `ofl/jetbrainsmono`).
+- Wordmark is **Route** in sentence case, 16 px bold (no hero size). The 20 px font-size ceiling, the 11 px floor and `prefers-reduced-motion` handling are unchanged.
+- Body keeps JetBrains Mono at 13 px for data-dense surfaces; labels, nav, headings and chips use Inter. `font-variant-numeric: tabular-nums` stays on.
+
+### Logo and favicon
+
+A geometric Y routing node: a white centre circle (`#F4F4F5`), three thin `#22D3EE` lines ending in `#22D3EE` dots. The favicon (`web/assets/favicon.svg`) sits on `#0A0A0B` with small rounded corners; the same drawing is inlined in the header beside the wordmark (`.brand-mark`, `aria-hidden`). No underline, glow, gradient or extra strokes. Checked at 16 and 32 px in `docs/screenshots/m90-favicon-16-32.png`. It is a mark only: the header does not present `useroute.dev` as the product name or as registered.
+
+### What did not change
+
+Layout columns (300/1fr/300 and 256/1fr/232), drawers, ticker tiers, state icons (shape + word), DEMO band, ghost-only wires, aggregate-stats separation and all evidence wording. `.brand-sub` (`opencode · jev`) stays.
+
+### Review (screenshots)
+
+`docs/screenshots/m90-*` at 1440×900 and 1024×768: populated, empty, partial, error, replay, combined, quota, flow, agreement, plus the header wordmark and favicon crops. Reviewed against this section and `BRAND.md`: DEMO band visible in all, layout identical to the #33 measurements, fixer lime, context rings ink, accent limited to logo, focus and selection bar. Measured limits and commands: [VERIFICATION](VERIFICATION.md) "BRAND redesign (#90)". Not an accessibility audit; no user comprehension test.
+
+## Typography (Lane Bay, superseded by BRAND in #90)
+
+> Values below are historical: see "BRAND redesign (#90)" for the current fonts.
 
 Fonts stay the existing local files (`web/assets/fonts.css`): **Instrument Sans** (labels, prompts, notes) and **IBM Plex Mono** (data, tabular numerals everywhere). No new fonts, files or dependencies.
 
@@ -39,7 +95,9 @@ Fonts stay the existing local files (`web/assets/fonts.css`): **Instrument Sans*
 - Wordmark: sentence case, ink, 15 px bold (was amber caps 13 px). Readout values 15 px (was 20 px). All six readouts stay, each with its note.
 - Caps labels are 11 px bold with letter spacing. No giant hero text.
 
-## Color system (Lane Bay: graphite, flat)
+## Color system (Lane Bay: graphite, flat; superseded by BRAND in #90)
+
+> Hex values below are historical (Lane Bay antecedent). The current palette, contrasts and the fixer reassignment are in "BRAND redesign (#90)". Rules that still apply: states use shape + word, flat colours, no gradients or shadows.
 
 | Token | Hex | Role | Replaces | Contrast on bg / panel / panel2 *(computed)* |
 | --- | --- | --- | --- | --- |
@@ -308,7 +366,7 @@ Not part of this contract; each needs its own approval.
 - **Light theme / theme selector.** Not in this contract; a separate decision (visual preferences are coordinated in #31).
 - **Crosspoint matrix** (exploration B). Separate approval; may suit the Agreement drawer, not the main screen.
 - **B ideas** (`HOW TO READ` block, source list with a status word, hatched aggregate label, sidebar navigation): routed to [#25](https://github.com/crisesarmiento/useroute/issues/25) for consideration with guided reading. None is part of this contract.
-- **Rejected:** a cyan context ring (hue collides with fixer teal); the full softened role-hue set (only orchestrator moves).
+- **Rejected:** a cyan context ring (it collides with the accent, and with the old fixer teal, now lime; see "BRAND redesign (#90)"); the full softened role-hue set (only orchestrator moves).
 - **Out of scope here:** connection-state behaviour (#24), guided-reading content (#25), desktop packaging (#27), new metrics, execution cables, new fonts or dependencies.
 
 ## Previous identity (shipped until #33 lands)
