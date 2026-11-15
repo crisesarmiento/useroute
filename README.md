@@ -195,17 +195,17 @@ full raw records remain inspectable for displayed events.
 Shortcuts: `/` search, `f` filters, `s` sources, `j`/`k` rows, `Enter` details, `1`–`8` drawers, `Esc` close. Replay controls also expose keyboard hints.
 The detail drawer preserves raw records and a session timeline of transmitted events.
 
-![Fixture replay switchboard](docs/screenshots/m4-flow-1440x900.png)
+![Fixture replay switchboard](docs/screenshots/m90-flow-1440x900.png)
 
-![Context agreement at 1024×768](docs/screenshots/m4-agreement-1024x768.png)
+![Context agreement at 1024×768](docs/screenshots/m90-agreement-1024x768.png)
 
-![Sessions inspector over retained events](docs/screenshots/m43-sessions-list-1440x900.png)
+![Sessions inspector over retained events](docs/screenshots/m90-sessions-1440x900.png)
 
-![Replay over a retained session](docs/screenshots/m9-replay-1440x900.png)
+![Replay over a retained session](docs/screenshots/m90-replay-1440x900.png)
 
-![Multi-source fixture exchange](docs/screenshots/m9-real-combined-1440x900.png)
+![Multi-source fixture exchange](docs/screenshots/m90-combined-1440x900.png)
 
-![Quota estimates and source coverage](docs/screenshots/m9-real-quota-1024x768.png)
+![Quota estimates and source coverage](docs/screenshots/m90-quota-1024x768.png)
 
 ## Weekly history
 
