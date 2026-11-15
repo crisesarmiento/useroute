@@ -646,7 +646,20 @@ export function DashboardShell({
       ) : null}
       <header className="head">
         <div className="brand">
-          <span className="brand-name">Routing exchange</span>
+          <svg className="brand-mark" aria-hidden="true" viewBox="0 0 32 32" width="28" height="28">
+            <g stroke="#22D3EE" strokeWidth="1.6" strokeLinecap="round" fill="none">
+              <line x1="16" y1="16" x2="16" y2="5" />
+              <line x1="16" y1="16" x2="7" y2="24" />
+              <line x1="16" y1="16" x2="25" y2="24" />
+            </g>
+            <g fill="#22D3EE">
+              <circle cx="16" cy="5" r="2.4" />
+              <circle cx="7" cy="24" r="2.4" />
+              <circle cx="25" cy="24" r="2.4" />
+            </g>
+            <circle cx="16" cy="16" r="4.2" fill="#F4F4F5" />
+          </svg>
+          <span className="brand-name">Route</span>
           <span className="brand-sub">opencode · jev</span>
         </div>
         <div className="readouts">
