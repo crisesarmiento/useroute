@@ -43,15 +43,14 @@ Contrast is **computed with the WCAG formula on token hex pairs; it is not an ac
 | `--ink` | text | `#F4F4F5` | primary text | 18.0 / 16.7 / 15.5 |
 | `--dim` | text-secondary | `#A1A1AA` | secondary text, metadata | 7.7 / 7.2 / 6.6 |
 | `--dim2` | text-muted | `#71717A` | **non-text only** (idle rings, dashed frames); BRAND allows placeholders/disabled, this UI does not use it for reading text | 4.1 / 3.8 / 3.5 (below 4.5 for text on every surface) |
-| `--sel` | accent | `#22D3EE` | focus ring, selection bar/hairline, links/CTA, logo | 11.0 / 10.2 / 9.4 |
-| `--accent-hover` | accent-hover | `#06B6D4` | hover on accent elements | 8.2 / 7.6 / 7.0 |
+| `--sel` | accent | `#22D3EE` | focus ring, selection bar/hairline, links/CTA, logo (BRAND's `#06B6D4` hover token is not defined: nothing in the UI uses an accent hover state) | 11.0 / 10.2 / 9.4 |
 | `--ok` | success | `#34D399` | live, ok | 10.3 / 9.6 / 8.8 |
 | `--err` | error | `#F87171` | error, link down | 7.2 / 6.7 / 6.1 |
 | `--warn` | none in BRAND | `#F2B548` (unchanged) | DEMO band, stale, connecting, partial, `NOT LINKED TO CALLS` | 10.8 / 10.1 / 9.3 |
-| `--ghost` | none | ink at 45% | dashed Jev suggestion wire | unchanged |
+| `--ghost` | none | new ink `#F4F4F5` at 45% (≈`#737374` on bg) | dashed Jev suggestion wire | 4.2 / 3.9 / 3.6 (non-text) |
 
 - **Explicit deviation:** BRAND has no warning colour. `--warn` stays because the DEMO contract needs a hue distinct from the accent and from error. The DEMO band remains solid, full width, `--warn` fill, dark text (10.8:1), 18 px.
-- **Accent discipline (BRAND "Do Not"):** `--sel` is never a surface fill. Selection stays a 2 px bar or hairline plus a surface step (`--panel2`); focus stays a 2 px outline. The reduced-motion arrival highlight, which was an 18% accent tint, is now a flat `--panel2` step, and a test forbids `color-mix` with `--sel`. Histogram "hit" bars use `--ink`, not the accent. No gradients, shadows or glow.
+- **Accent discipline (BRAND "Do Not"):** `--sel` is never a surface fill. Selection stays a 2 px bar or hairline plus a surface step (`--panel2`); focus stays a 2 px outline. The reduced-motion arrival highlight, which was an 18% accent tint, is now a flat `--panel2` step, and a test forbids `color-mix` with `--sel`. Histogram and small-multiple "hit" bars use `--ink`, not the accent (tested). No gradients, shadows or glow.
 - **Role hues:** orchestrator `#E8C26A`, oracle `#C792EA`, explorer `#82AAFF`, designer `#F78C6C` are unchanged. **Fixer moves from teal `#3CC8B4` to lime `#C8F169`** (the former Lane Bay `--sel`; contrast 15.3 / 14.2 / 13.1). Why: the approved cyan accent `#22D3EE` sits at hue ≈188° and the old teal at ≈171°, a Δ of about 17°, so selection/focus and fixer would read as one colour. Lime is ≈78°, about 110° from the accent, and does not collide with orchestrator, oracle, explorer, designer or success `#34D399`. `#3CC8B4` no longer appears in `styles.css` (tested). Role shapes (diamond, hexagon, circle, square, pentagon) are untouched; colour only reinforces them.
 - **Recorded context** stays a hollow ring in **ink**. A cyan context ring remains **rejected**: it would again collide with the accent (and previously with the fixer teal). Context is never painted with the accent.
 
@@ -60,7 +59,7 @@ Contrast is **computed with the WCAG formula on token hex pairs; it is not an ac
 | Role | Family | Weights | Token |
 | --- | --- | --- | --- |
 | wordmark, display | Space Grotesk | 700, letter-spacing -0.02em | `--display` |
-| UI labels and body text | Inter | 400, 500, 600, 700 | `--label` |
+| UI labels and body text | Inter | 400, 600 (emphasis; BRAND reserves 700 for the wordmark and very large titles) | `--label` |
 | data, tabular numerals | JetBrains Mono | 400, 700 | `--mono` |
 
 - Variable TTFs in `web/assets/fonts/` (`SpaceGrotesk.ttf`, `Inter.ttf`, `JetBrainsMono.ttf`, each with its `*-OFL.txt`), declared only in `web/assets/fonts.css` with relative `./fonts/` URLs: no CDN, no `https:`, no `data:`, so the CSP (`default-src 'self'`) holds. Instrument Sans and IBM Plex Mono and their files are removed. Sources: the `google/fonts` repository (`ofl/spacegrotesk`, `ofl/inter`, `ofl/jetbrainsmono`).
@@ -69,7 +68,7 @@ Contrast is **computed with the WCAG formula on token hex pairs; it is not an ac
 
 ### Logo and favicon
 
-A geometric Y routing node: a white centre circle (`#F4F4F5`), three thin `#22D3EE` lines ending in `#22D3EE` dots. The favicon (`web/assets/favicon.svg`) sits on `#0A0A0B` with small rounded corners; the same drawing is inlined in the header beside the wordmark (`.brand-mark`, `aria-hidden`). No underline, glow, gradient or extra strokes. Checked at 16 and 32 px in `docs/screenshots/m90-favicon-16-32.png`. It is a mark only: the header does not present `useroute.dev` as the product name or as registered.
+A geometric Y routing node: a white centre circle (`#F4F4F5`), three thin `#22D3EE` lines ending in `#22D3EE` dots. The favicon (`web/assets/favicon.svg`) sits on `#0A0A0B` as a square tile (no rounded corners); the same drawing is inlined in the header beside the wordmark (`.brand-mark`, `aria-hidden`). No underline, glow, gradient or extra strokes. Checked at 16 and 32 px in `docs/screenshots/m90-favicon-16-32.png`. It is a mark only: the header does not present `useroute.dev` as the product name or as registered.
 
 ### What did not change
 

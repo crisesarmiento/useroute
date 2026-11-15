@@ -273,7 +273,7 @@ Presentation-only change in `web/`: BRAND palette, self-hosted Space Grotesk / I
 
 ### Tests first (failing before, passing after)
 
-- Expectations moved to the BRAND contract before any implementation: `test/lane-bay.test.tsx` (wordmark `Route` + `brand-mark`, BRAND tokens and `--accent-hover`, no `#000000`, no Lane Bay hexes, fixer `#C8F169` and no `#3CC8B4`, no `color-mix` with `--sel`, wordmark 16 px bold in `--display` with negative tracking), `test/ui-shell.test.tsx` (BRAND hex list, `#3CC8B4` absent, all `url()` in `fonts.css` exist, Space Grotesk / Inter / JetBrains Mono faces and their OFL files exist, Instrument Sans / IBM Plex Mono gone from CSS and disk), `test/product-identity.test.ts` (favicon: three lines, four circles, `#22D3EE`, `#0A0A0B`, no `#000000`, no old amber paths/hex, no gradient/filter; `index.html` links the favicon, no `https:`).
+- Expectations moved to the BRAND contract before any implementation: `test/lane-bay.test.tsx` (wordmark `Route` + `brand-mark`, BRAND tokens (no `--accent-hover`), no `#000000`, no Lane Bay hexes, fixer `#C8F169` and no `#3CC8B4`, no `color-mix` with `--sel`, wordmark 16 px bold in `--display` with negative tracking, chart hit bars in ink not accent, no 700 on the label face), `test/ui-shell.test.tsx` (BRAND hex list, `#3CC8B4` absent, all `url()` in `fonts.css` exist, Space Grotesk / Inter / JetBrains Mono faces and their OFL files exist, Instrument Sans / IBM Plex Mono gone from CSS and disk), `test/product-identity.test.ts` (favicon: three lines, four circles, `#22D3EE`, `#0A0A0B`, no `#000000`, no old amber paths/hex, no gradient/filter; `index.html` links the favicon, no `https:`).
 - Red: `bun test test/lane-bay.test.tsx test/ui-shell.test.tsx test/product-identity.test.ts` → exit 1, 42 pass / 4 fail on the new expectations. Green after implementation: same command → exit 0.
 - Guards kept as-is: no shadows/gradients/`infinite`, `--dim2` non-text, 2 px focus ring, DEMO band 18 px `--warn` fill, state shapes, grid columns 300/1fr/300 and 256/1fr/232, font-size ceiling 20 px, `fonts.css` without `https:`/`data:`, no inline styles. No test was skipped, deleted or weakened; the wordmark size assertion moved 15 → 16 px bold with the display face (`scripts/verify-ui.mjs` check updated the same way).
 
@@ -307,3 +307,7 @@ node scripts/verify-ui.mjs --url http://127.0.0.1:<port> --state-dir <tmp-state>
 ### Limits
 
 Anonymized DEMO data only; no real OpenCode logs; no multi-browser or screen-reader check; font files were fetched from the `google/fonts` repository (OFL texts included) rather than from an npm package.
+
+### Review follow-up (PR #93)
+
+The first push documented ink hit bars but the CSS still used `fill: var(--sel)` for `.hist .bar.hit` and `.multiple .bar.hit` (a silent no-op replacement on my side); review caught it. Fixed with a test written first: `test/lane-bay.test.tsx` failed against the previous `styles.css` (26 pass / 1 fail) and passes now. Also: label-face weights 700 → 600, unused `--accent-hover` removed, `--ghost` rebased on the new ink, favicon square (no `rx`), `m90-*` screenshots refreshed (agreement drawer now shows ink bars). Final-head commands are listed in the PR.
