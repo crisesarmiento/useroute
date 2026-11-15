@@ -49,6 +49,8 @@ test("favicon is the BRAND Y-node: white centre, three cyan lines with dots, #0A
   expect(svg.match(/<circle\b/g)).toHaveLength(4);
   expect(svg).toMatch(/<circle[^>]*fill="#F4F4F5"/i);
   expect(svg).not.toMatch(/gradient|filter|blur|shadow/i);
+  // Square tile: no rounded corners beyond the geometric node.
+  expect(svg).not.toMatch(/\srx=/);
 });
 
 test("index.html points at the favicon and loads local font css", async () => {

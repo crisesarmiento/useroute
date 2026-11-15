@@ -394,12 +394,12 @@ test("stylesheet: BRAND tokens, role hues, focus and evidence styling", async ()
   expect(token("dim")).toBe("#a1a1aa");
   expect(token("dim2")).toBe("#71717a");
   expect(token("sel")).toBe("#22d3ee");
-  expect(token("accent-hover")).toBe("#06b6d4");
+  expect(root).not.toContain("--accent-hover");
   // --warn is a documented deviation from BRAND (no warn token there): DEMO band, stale, connecting.
   expect(token("warn")).toBe("#f2b548");
   expect(token("ok")).toBe("#34d399");
   expect(token("err")).toBe("#f87171");
-  expect(token("ghost")).toMatch(/45%/);
+  expect(token("ghost")).toMatch(/244 244 245 \/ 45%/);
   // No pure black anywhere; Lane Bay graphite, lime accent and the old amber hexes are gone.
   expect(up).not.toContain("#000000");
   expect(up).not.toMatch(/#000(?![0-9A-F])/);
@@ -422,6 +422,14 @@ test("stylesheet: BRAND tokens, role hues, focus and evidence styling", async ()
   expect(css).not.toContain("var(--amber)");
   // Accent never paints a surface: no color-mix with --sel, no gradients (cyan is bars, hairlines, focus only).
   expect(css).not.toMatch(/color-mix\([^)]*var\(--sel\)/);
+  // Chart "hit" bars are ink, never the accent (BRAND: accent is not a large fill).
+  for (const sel of [/\.hist \.bar\.hit\s*\{([^}]*)\}/, /\.multiple \.bar\.hit\s*\{([^}]*)\}/]) {
+    const rule = css.match(sel)?.[1] ?? "";
+    expect(rule).toContain("fill: var(--ink)");
+    expect(rule).not.toMatch(/--sel|#22d3ee/i);
+  }
+  // Label-face emphasis is 600 at most; 700 stays for the wordmark and data readouts.
+  expect(css).not.toMatch(/font:\s*700 [^;]*var\(--label\)/);
   // Fixer moves from teal to lime (cyan accent would clash with teal); contexts rings stay ink, never cyan.
   expect(up).not.toContain("#3CC8B4");
   expect(css).toMatch(/\.r-fixer\s*\{\s*--c:\s*#c8f169/i);

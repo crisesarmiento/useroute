@@ -261,7 +261,6 @@ test("stylesheet follows DESIGN tokens, local fonts and motion rules", async () 
     "#A1A1AA",
     "#71717A",
     "#22D3EE",
-    "#06B6D4",
     "#F2B548",
     "#34D399",
     "#F87171",
