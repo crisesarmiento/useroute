@@ -9,6 +9,7 @@ Read-only research and `Under evaluation` proposals do not authorize implementat
 
 ## Git workflow
 - Default/integration branch: `develop`. All PRs target `develop` (squash-merge). `main` = releases only (develop → main PR + `vX.Y.Z` tag, maintainer only).
+- Open PRs ready for review, never as drafts. The reviewer reviews once, when the PR is opened (Cristian, 2026-11-22).
 - Branches `<type>/<issue>-<slug>` (`feat|fix|chore|test|docs|refactor`). Never push to `develop`/`main`, never force-push shared branches, never delete branches or push tags unless told.
 - Conventional commits; SemVer; update `CHANGELOG.md` `[Unreleased]`. Details: CONTRIBUTING.md.
 
